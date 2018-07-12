@@ -20,8 +20,8 @@ const paths = {
 
 gulp.task("copy", () => {
     return vfs.src(paths.tocopy, {
-            dot: true
-        })
+        dot: true
+    })
         .pipe(vfs.dest("./dist"));
 });
 

@@ -4,14 +4,14 @@ export = (app) => {
 
     const endpoint = process.env.API_BASE + "tasks";
 
-    app.post(endpoint, Task.create);
+    app.get(endpoint, Task.getAll);
 
-    app.delete(endpoint + "/:id", Task.delete);
+    app.post(endpoint, Task.create);
 
     app.get(endpoint + "/:id", Task.getOne);
 
-    app.get(endpoint, Task.getAll);
-
     app.put(endpoint + "/:id", Task.update);
+
+    app.delete(endpoint + "/:id", Task.delete);
 
 };

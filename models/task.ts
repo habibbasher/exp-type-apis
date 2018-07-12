@@ -5,13 +5,21 @@ export interface ITask extends mongoose.Document {
         type: string,
         require: true
     };
+    description: {
+        type: string,
+        require: false
+    };
     scheduled_date: Date;
 }
 
 export const schema = new mongoose.Schema({
-        name: {
+    name: {
         type: String,
         require: true
+    },
+    description: {
+        type: String,
+        require: false
     },
     scheduled_date: {
         type: Date,
