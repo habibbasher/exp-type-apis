@@ -1,7 +1,7 @@
 export = (app) => {
 
-    // require("./auth")(app);
-    // require("./users")(app);
+    require("./authenticate")(app);
+    require("./users")(app);
     require("./tasks")(app);
 
     app.get("/", (req, res) => res.status(200).json({ message: "Welcome to the TODO API. Check the documentation for the list of available endpoints" }));
