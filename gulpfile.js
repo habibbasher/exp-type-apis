@@ -2,7 +2,7 @@ const gulp = require("gulp");
 const sourcemaps = require("gulp-sourcemaps"); // So Istanbul is able to map the code
 const tsProject = require("gulp-typescript").createProject("tsconfig.json");
 const vfs = require("vinyl-fs");
-// const apidoc = require("gulp-apidoc");
+const apidoc = require("gulp-apidoc");
 
 const paths = {
     tocopy: ["./**", "!./dist", "!./dist/**", "!./**/*.ts", "!./.vscode", "!./.vscode/**", "!./gulpfile.js", "!./*.log", "!./*.lock", "!./*.md", "!./*.json", "!./*.yml", "!./LICENSE",
@@ -11,12 +11,12 @@ const paths = {
     tsfiles: ["./config", "./controllers", "./models", "./routes/*.ts", "./test"]
 };
 
-// gulp.task("apidoc", (done) => {
-//     apidoc({
-//         src: "./routes",
-//         dest: "../docs/apidoc"
-//     }, done);
-// });
+gulp.task("apidoc", (done) => {
+    apidoc({
+        src: "./routes",
+        dest: "./docs/apidoc"
+    }, done);
+});
 
 gulp.task("copy", () => {
     return vfs.src(paths.tocopy, {
@@ -33,9 +33,9 @@ gulp.task("transpile", () => {
         .pipe(gulp.dest("./dist"));
 });
 
-gulp.task("default", ["copy", "transpile"], (done) => done());
+gulp.task("default", ["copy", "apidoc", "transpile"], (done) => done());
 
 gulp.task("watch", () => {
-    // gulp.watch(["./routes/**"], ["apidoc"]);
+    gulp.watch(["./routes/**"], ["apidoc"]);
     gulp.watch(paths.tsfiles, ["transpile"]);
 });
